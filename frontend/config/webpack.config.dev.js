@@ -1,6 +1,8 @@
 var path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var VueLoaderPlugin = require('vue-loader/lib/plugin');
+var webpack = require("webpack");
+
 
 module.exports = {
     mode: "development",
@@ -34,7 +36,7 @@ module.exports = {
                             ],
                         ],
                         plugins: [
-                            "@babel/plugin-proposal-class-properties"
+                            "@babel/plugin-proposal-optional-chaining"
                         ]
                     }
                 }
@@ -53,6 +55,7 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
+        new webpack.SourceMapDevToolPlugin({filename: '[name].js.map',}),
         new HtmlWebpackPlugin({
             template: "./src/index.template.html",
             filename: "index.html",

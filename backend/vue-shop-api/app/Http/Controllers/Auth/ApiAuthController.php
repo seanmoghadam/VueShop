@@ -57,12 +57,12 @@ class ApiAuthController extends Controller
                 $response = ['token' => $token];
                 return response($response, 200);
             } else {
-                $response = ["message" => "Password mismatch"];
-                return response($response, 422);
+                $response = ["message" => "Falsche Login-Daten"];
+                return response($response, 400);
             }
         } else {
-            $response = ["message" => 'User does not exist'];
-            return response($response, 422);
+            $response = ["message" => 'Falsche Login-Daten'];
+            return response($response, 400);
         }
     }
 }

@@ -1,4 +1,5 @@
 import Login from "./components/Login";
+import Register from "./components/Register";
 import App from "./App";
 import VueRouter from "vue-router";
 
@@ -24,10 +25,16 @@ const routes = [
         beforeEnter: authGuard
     },
     {
+        path: '/register',
+        component: Register,
+        name: "Register",
+    },
+    {
         path: '/',
         component: Login,
         name: "Login",
     },
+    
     // {
     //     path: '*',
     //     redirect: '/login',

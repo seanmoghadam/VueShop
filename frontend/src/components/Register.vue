@@ -1,10 +1,30 @@
 <template>
-    <div id="LoginPage">
+    <div id="RegisterPage">
         <form
             action="post"
-            @submit="submitLogin"
+            @submit="submitRegister"
             class="flex flex-col w-75 justify-center items-center w-40 mx-auto mt-20 border-1 border-gray-400	-"
         >
+            <fieldset class="block">
+                <label for="firstname">Vorname</label>
+                <input
+                    type="text"
+                    name="firstname"
+                    id="firstname"
+                    v-model="firstname"
+                    placeholder="Ihr Vorname"
+                />
+            </fieldset>
+            <fieldset class="block">
+                <label for="lastname">Nachname</label>
+                <input
+                    type="text"
+                    name="lastname"
+                    id="lastname"
+                    v-model="lastname"
+                    placeholder="Ihr Nachname"
+                />
+            </fieldset>
             <fieldset class="block">
                 <label for="email">E-Mail</label>
                 <input
@@ -25,6 +45,16 @@
                     placeholder="Ihr Passwort"
                 />
             </fieldset>
+            <fieldset class="block">
+                <label for="password_confirmation">Passwort Wiederholung</label>
+                <input
+                    type="password"
+                    name="password_confirmation"
+                    id="password_confirmation"
+                    v-model="password_confirmation"
+                    placeholder="Ihr Passwort"
+                />
+            </fieldset>
 
             <span
                 v-if="loading"
@@ -32,14 +62,12 @@
                 >Loading...</span
             >
 
-            <input type="submit" value="Einloggen" class="px-5 mt-3" />
+            <input type="submit" value="Registrieren" class="px-5 mt-3" />
             <ul id="errors" class="text-xs mt-5" style="color: red">
                 <li v-for="error in errors" :key="error">
                     {{ error }}
                 </li>
             </ul>
-            <span>oder</span>
-            <router-link :to="'register'">Registrieren</router-link>
         </form>
     </div>
 </template>
@@ -49,19 +77,27 @@ import axios from "axios";
 
 export default {
     data: () => ({
+        // state
         errors: [],
-        email: null,
-        password: null,
         loading: false,
+
+        // form state
+        password: null,
+        firstname: null,
+        lastname: null,
+        password_confirmation: null,
+        email: null,
     }),
     methods: {
-        submitLogin: function(e) {
+        submitRegister: function(e) {
             this.loading = true;
             this.errors = [];
             axios
-                .post("http://localhost/api/login", {
+                .post("http://localhost/api/register", {
                     email: this.email,
                     password: this.password,
+                    password_confirmation: this.password_confirmation,
+                    name: this.name,
                 })
                 .catch((e) => {
                     console.error("Error", e.response);
