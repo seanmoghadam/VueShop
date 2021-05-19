@@ -6,7 +6,7 @@
             class="flex flex-col w-75 justify-center items-center w-40 mx-auto mt-20 border-1 border-gray-400	-"
         >
             <fieldset class="block">
-                <label for="email">E-Mail</label>
+                <label class="text-sm" for="email">E-Mail</label>
                 <input
                     type="email"
                     name="email"
@@ -16,7 +16,7 @@
                 />
             </fieldset>
             <fieldset class="block">
-                <label for="password">Passwort</label>
+                <label class="text-sm" for="password">Passwort</label>
                 <input
                     type="password"
                     name="password"
@@ -32,7 +32,8 @@
                 >Loading...</span
             >
 
-            <input type="submit" value="Einloggen" class="px-5 mt-3" />
+
+            <input type="submit" value="Einloggen" class="px-5 mt-3 cursor-pointer" />
             <ul id="errors" class="text-xs mt-5" style="color: red">
                 <li v-for="error in errors" :key="error">
                     {{ error }}

@@ -5,28 +5,19 @@
             @submit="submitRegister"
             class="flex flex-col w-75 justify-center items-center w-40 mx-auto mt-20 border-1 border-gray-400	-"
         >
+            
             <fieldset class="block">
-                <label for="firstname">Vorname</label>
+                <label class="text-sm" for="name">Name</label>
                 <input
                     type="text"
-                    name="firstname"
-                    id="firstname"
-                    v-model="firstname"
-                    placeholder="Ihr Vorname"
+                    name="name"
+                    id="name"
+                    v-model="name"
+                    placeholder="Ihr Name"
                 />
             </fieldset>
             <fieldset class="block">
-                <label for="lastname">Nachname</label>
-                <input
-                    type="text"
-                    name="lastname"
-                    id="lastname"
-                    v-model="lastname"
-                    placeholder="Ihr Nachname"
-                />
-            </fieldset>
-            <fieldset class="block">
-                <label for="email">E-Mail</label>
+                <label class="text-sm" for="email">E-Mail</label>
                 <input
                     type="email"
                     name="email"
@@ -36,7 +27,7 @@
                 />
             </fieldset>
             <fieldset class="block">
-                <label for="password">Passwort</label>
+                <label class="text-sm" for="password">Passwort</label>
                 <input
                     type="password"
                     name="password"
@@ -46,7 +37,7 @@
                 />
             </fieldset>
             <fieldset class="block">
-                <label for="password_confirmation">Passwort Wiederholung</label>
+                <label class="text-sm" for="password_confirmation">Passwort Wiederholung</label>
                 <input
                     type="password"
                     name="password_confirmation"
@@ -59,8 +50,8 @@
             <span
                 v-if="loading"
                 class="h-screen w-screen absolute left-0 top-0 flex justify-center items-center"
-                >Loading...</span
-            >
+                >Loading...
+            </span>
 
             <input type="submit" value="Registrieren" class="px-5 mt-3" />
             <ul id="errors" class="text-xs mt-5" style="color: red">
@@ -83,8 +74,7 @@ export default {
 
         // form state
         password: null,
-        firstname: null,
-        lastname: null,
+        name: null,
         password_confirmation: null,
         email: null,
     }),
@@ -113,11 +103,7 @@ export default {
                 })
                 .then((resp) => {
                     if (resp?.data?.token) {
-                        window.localStorage.setItem(
-                            "authorization-token",
-                            resp.data.token
-                        );
-                        this.$router.push("/book-listing");
+                        this.$router.push("/");
                     }
                 })
                 .finally(() => {

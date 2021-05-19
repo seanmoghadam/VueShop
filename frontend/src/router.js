@@ -1,6 +1,7 @@
 import Login from "./components/Login";
+import Error from "./components/Error";
 import Register from "./components/Register";
-import App from "./App";
+import BookListing from "./components/BookListing";
 import VueRouter from "vue-router";
 
 const authGuard = (_to, _from, next) => {
@@ -21,7 +22,7 @@ const authGuard = (_to, _from, next) => {
 const routes = [
     {
         path: '/book-listing',
-        component: App,
+        component: BookListing,
         beforeEnter: authGuard
     },
     {
@@ -35,10 +36,10 @@ const routes = [
         name: "Login",
     },
     
-    // {
-    //     path: '*',
-    //     redirect: '/login',
-    // }
+    {
+        path: '*',
+        component: Error,
+    }
 ]
 
 const router = new VueRouter({
