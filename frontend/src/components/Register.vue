@@ -5,7 +5,6 @@
             @submit="submitRegister"
             class="flex flex-col w-75 justify-center items-center w-40 mx-auto mt-20 border-1 border-gray-400	-"
         >
-            
             <fieldset class="block">
                 <label class="text-sm" for="name">Name</label>
                 <input
@@ -37,7 +36,9 @@
                 />
             </fieldset>
             <fieldset class="block">
-                <label class="text-sm" for="password_confirmation">Passwort Wiederholung</label>
+                <label class="text-sm" for="password_confirmation"
+                    >Passwort Wiederholung</label
+                >
                 <input
                     type="password"
                     name="password_confirmation"
@@ -54,7 +55,7 @@
             </span>
 
             <input type="submit" value="Registrieren" class="px-5 mt-3" />
-            <ul id="errors" class="text-xs mt-5" style="color: red">
+            <ul id="errors" class=" mt-5" style="color: red">
                 <li v-for="error in errors" :key="error">
                     {{ error }}
                 </li>

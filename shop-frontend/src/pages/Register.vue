@@ -17,7 +17,9 @@
                 />
             </fieldset>
             <fieldset class="block">
-                <label class="text-sm inline-block w-24" for="email">E-Mail</label>
+                <label class="text-sm inline-block w-24" for="email"
+                    >E-Mail</label
+                >
                 <input
                     type="email"
                     name="email"
@@ -27,7 +29,9 @@
                 />
             </fieldset>
             <fieldset class="block">
-                <label class="text-sm inline-block w-24" for="password">Passwort</label>
+                <label class="text-sm inline-block w-24" for="password"
+                    >Passwort</label
+                >
                 <input
                     type="password"
                     name="password"
@@ -37,7 +41,9 @@
                 />
             </fieldset>
             <fieldset class="block">
-                <label class="text-sm inline-block w-24" for="password_confirmation"
+                <label
+                    class="text-sm inline-block w-24"
+                    for="password_confirmation"
                     >Passwort Wiederholung</label
                 >
                 <input
@@ -51,15 +57,19 @@
 
             <loading></loading>
 
-            <input type="submit" value="Registrieren" class="px-5 mt-8" />
-            <ul id="errors" class="text-xs mt-5" style="color: red">
-                <li v-for="error in errors" :key="error">
-                    {{ error }}
-                </li>
-            </ul>
-            <div class="flex flex-col items-center justify-content-center">
+            <input
+                type="submit"
+                value="Registrieren"
+                class="px-5 mt-8 cursor-pointer"
+            />
+
+            <error-renderer :errors="errors"></error-renderer>
+
+            <div class="flex flex-col items-center justify-content-center ">
                 <span>oder</span>
-                <router-link :to="'login'">Einloggen</router-link>
+                <router-link :to="'login'" class="text-lightBlue-600"
+                    >Einloggen</router-link
+                >
             </div>
         </form>
     </div>
@@ -67,10 +77,12 @@
 
 <script>
 import axios from "axios";
-import Loading from './Loading.vue';
+import Loading from "../components/Loading.vue";
+import { errorFormatter } from "../helpers";
+import ErrorRenderer from "../components/ErrorRenderer.vue";
 
 export default {
-  components: { Loading },
+    components: { Loading, ErrorRenderer },
     data: () => ({
         // state
         errors: [],
@@ -94,16 +106,7 @@ export default {
                     name: this.name,
                 })
                 .catch((e) => {
-                    console.error("Error", e.response);
-                    if (Array.isArray(e?.response?.data?.errors)) {
-                        this.errors = e.response.data.errors;
-                    } else if (e?.response?.data?.message) {
-                        this.errors = [e?.response?.data?.message];
-                    } else {
-                        this.errors = [
-                            "Es ist ein unbekannter Fehler aufgetreten",
-                        ];
-                    }
+                    this.errors = errorFormatter(e);
                 })
                 .then((resp) => {
                     if (resp?.data?.token) {

@@ -1,6 +1,6 @@
 <template>
     <div id="BookListingPage">
-        <h1>Bücher Liste</h1>
+        <h1 class="text-xl">Bücher Liste</h1>
         <span
             v-if="loading"
             class="h-screen w-screen absolute left-0 top-0 flex justify-center items-center"

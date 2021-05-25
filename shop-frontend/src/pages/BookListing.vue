@@ -1,14 +1,14 @@
 <template>
     <div id="BookListingPage" class="max-w-xl m-auto">
-        <h1 class="my-3">Bücher Liste</h1>
+        <h1 class="text-xl">Bücher Liste</h1>
         <loading></loading>
         <ul class="flex flex-row flex-wrap">
             <li
-                v-for="(book, index) in books"
-                :key="book.isbn + index"
+                v-for="book in books"
+                :key="book.id"
                 class="flex flex-col rounded overflow-hidden shadow-lg p-2 w-full md:w-1/3 lg:w-1/4"
             >
-                <h2 class="text-xs truncate">{{ book.title }}</h2>
+                <h2 class=" truncate">{{ book.title }}</h2>
                 <div class="flex justify-between">
                     <div class="relative">
                         <img
@@ -18,7 +18,7 @@
                         />
                         <button
                             @click="addBookToCart(book)"
-                            class="bg-green-500 hover:red-700 text-white font-bold py-1 px-4 rounded text-xs mt-1 absolute right-1 bottom-1"
+                            class="bg-green-500 hover:red-700 text-white font-bold py-1 px-4 rounded  mt-1 absolute right-1 bottom-1"
                         >
                             Add
                         </button>
@@ -26,16 +26,19 @@
                 </div>
             </li>
         </ul>
+        <error-renderer :errors="errors"></error-renderer>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import Loading from "./Loading.vue";
-import store from "./../store";
+import Loading from "../components/Loading.vue";
+import store from "../store";
+import { errorFormatter } from "../helpers";
+import ErrorRenderer from "../components/ErrorRenderer.vue";
 
 export default {
-    components: { Loading },
+    components: { Loading, ErrorRenderer },
     data: () => ({
         // app specific state
         errors: [],
@@ -44,10 +47,12 @@ export default {
         // content specific state
         books: [],
     }),
+    // on mount -> fetch books
     beforeMount() {
         this.getBooks();
     },
     methods: {
+        // method fetch books
         getBooks: function() {
             this.loading = true;
             this.errors = [];
@@ -59,16 +64,7 @@ export default {
                     },
                 })
                 .catch((e) => {
-                    console.error("Error", e.response);
-                    if (Array.isArray(e?.response?.data?.errors)) {
-                        this.errors = e.response.data.errors;
-                    } else if (e?.response?.data?.message) {
-                        this.errors = [e?.response?.data?.message];
-                    } else {
-                        this.errors = [
-                            "Es ist ein unbekannter Fehler aufgetreten",
-                        ];
-                    }
+                    this.errors = errorFormatter(e);
                 })
                 .then((resp) => {
                     if (resp?.data) {

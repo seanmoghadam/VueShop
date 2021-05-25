@@ -3,7 +3,7 @@
         class="relative select-none lg:flex lg:items-stretch w-full bg-gray-800"
     >
         <div
-            class="flex flex-no-shrink items-stretch h-12 list-none text-white py-3 max-w-xl m-auto w-full items-center"
+            class="flex flex-no-shrink h-12 list-none text-white py-3 max-w-xl m-auto w-full items-center"
         >
             <div class="flex justify-content-between w-full items-center">
                 <router-link
@@ -53,7 +53,7 @@
             </div>
             <cart-modal :is-logged-in="isLoggedIn"></cart-modal>
             <button
-                class="bg-red-500 hover:red-700 text-white font-bold py-1 px-4 rounded text-xs ml-2"
+                class="bg-red-500 hover:red-700 text-white font-bold py-1 px-4 rounded  ml-2"
                 v-if="isLoggedIn"
                 @click="logout"
             >
@@ -65,9 +65,9 @@
 
 <script>
 import { isLoggedIn, logout } from "./../helpers";
-import CartModal from './CartModal.vue';
+import CartModal from "./CartModal.vue";
 export default {
-  components: { CartModal },
+    components: { CartModal },
     data: () => ({
         isLoggedIn: isLoggedIn(),
     }),

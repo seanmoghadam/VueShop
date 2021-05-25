@@ -1,11 +1,15 @@
 <template>
     <div>
         <button
-                class="bg-green-500 hover:red-700 text-white font-bold py-1 px-4 rounded text-xs ml-2"
+            class="bg-green-500 hover:red-700 text-white font-bold py-1 px-4 rounded mx-4 relative"
             v-if="isLoggedIn"
             @click="openCart"
         >
             Warenkorb
+            <span
+                class="px-1 text-xs absolute bg-blue-400 border-black rounded-full -right-2 -top-2"
+                >{{ cart.length }}</span
+            >
         </button>
         <div
             class="fixed z-10 inset-0 overflow-y-auto display-none"
@@ -42,7 +46,7 @@
                     >
                         <h3>Warenkorb</h3>
                         <hr />
-                        <p v-if="!cart.length" class="text-xs mt-2">
+                        <p v-if="!cart.length" class=" mt-2">
                             Aktuell keine Bücher im Warenkorb
                         </p>
                         <ul class="h-40 overflow-auto">
@@ -51,7 +55,7 @@
                                 :key="index + book.isbn"
                                 class="flex justify-between my-3 items-center"
                             >
-                                <p class="text-xs">
+                                <p class="">
                                     <span class="truncate">{{
                                         book.title
                                     }}</span>
@@ -59,7 +63,7 @@
                                 </p>
 
                                 <button
-                                    class="bg-red-500 hover:red-700 text-white font-bold p-1 rounded text-xs"
+                                    class="bg-red-500 hover:red-700 text-white font-bold p-1 rounded "
                                     @click="removeBookFromCart(index)"
                                 >
                                     x

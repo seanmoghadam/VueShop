@@ -1,7 +1,7 @@
-import Login from "./components/Login";
-import Error from "./components/Error";
-import Register from "./components/Register";
-import BookListing from "./components/BookListing";
+import Login from "./pages/Login";
+import Error404 from "./pages/Error404";
+import Register from "./pages/Register";
+import BookListing from "./pages/BookListing";
 import VueRouter from "vue-router";
 import { isLoggedIn } from "./helpers";
 
@@ -47,10 +47,9 @@ const routes = [
         name: "Login",
         beforeEnter: redirectGuard
     },
-    
     {
         path: '*',
-        component: Error,
+        component: Error404,
     }
 ]
 
