@@ -1,12 +1,20 @@
-import "./index.scss";
-import Vue from 'vue';
-import App from "./App";
-import VueRouter from "vue-router";
-import router from "./router.js";
+import './index.scss';
+import { createApp, h } from 'vue';
+import App from './App';
+import routes from './router.js';
+import { createRouter, createWebHashHistory } from 'vue-router';
 
-Vue.use(VueRouter);
+const router = createRouter({
+  // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
+  history: createWebHashHistory(),
+  routes, // short for `routes: routes`
+});
 
-new Vue({
-  render: h => h(App),
-  router
-}).$mount('#root')
+const app = createApp({
+  render: () => h(App),
+  router,
+});
+
+app.use(router);
+
+app.mount('#root');
