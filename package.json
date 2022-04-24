@@ -1,0 +1,46 @@
+{
+  "name": "vue-shop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently --kill-others \"yarn run start:server\" \"yarn serve\"",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "start:server": "json-server ./api/db.json -m ./node_modules/json-server-auth -r ./api/routes.json"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss7-compat": "^2.2.17",
+    "autoprefixer": "^9",
+    "axios": "^0.26.1",
+    "core-js": "^3.6.5",
+    "date-fns": "^2.28.0",
+    "js-cookie": "^3.0.1",
+    "postcss": "^7",
+    "register-service-worker": "^1.7.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0",
+    "vuex": "^4.0.0-0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.15",
+    "@vue/cli-plugin-eslint": "~4.5.15",
+    "@vue/cli-plugin-pwa": "~4.5.15",
+    "@vue/cli-plugin-router": "~4.5.15",
+    "@vue/cli-plugin-vuex": "~4.5.15",
+    "@vue/cli-service": "~4.5.15",
+    "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "concurrently": "^7.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-vue": "^7.0.0",
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0",
+    "prettier": "^2.2.1",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2"
+  }
+}
