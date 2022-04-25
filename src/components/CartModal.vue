@@ -2,7 +2,6 @@
   <div>
     <button
       class="relative px-4 py-1 mx-4 font-bold text-white bg-green-500 rounded hover:red-700"
-      v-if="isLoggedIn"
       @click="openCart"
     >
       Warenkorb
@@ -78,15 +77,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import store from "./../store";
-
 export default {
   data: () => ({
     cartOpen: false,
   }),
   props: {
-    isLoggedIn: Boolean,
+    cart: Array,
   },
   computed: {
     total() {
@@ -96,9 +92,6 @@ export default {
       }
       return total.toFixed(2);
     },
-    ...mapState({
-      cart: (state) => state.cart,
-    }),
   },
   methods: {
     openCart: function () {
@@ -107,8 +100,8 @@ export default {
     closeCart: function () {
       this.cartOpen = false;
     },
-    removeBookFromCart: (index) => {
-      store.commit("removeBookFromCart", index);
+    removeBookFromCart: function (index) {
+      this.$emit("removeBookFromCart", index);
     },
   },
 };

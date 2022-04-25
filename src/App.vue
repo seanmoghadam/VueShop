@@ -1,16 +1,13 @@
 <template>
   <div id="app">
-    <navigation></navigation>
-    <main class="mt-16">
-      <router-view></router-view>
-    </main>
+    <book-listing></book-listing>
   </div>
 </template>
 
 <script>
-import Navigation from "./components/Navigation.vue";
+import BookListing from "./views/index.vue";
 export default {
-  components: { Navigation },
+  components: { BookListing },
 };
 </script>
 

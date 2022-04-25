@@ -23,7 +23,6 @@ export default class BookService {
   };
 
   static addBookToCart = (currentState, newItem) => {
-    console.log(currentState, newItem);
     currentState.cart.push(newItem);
   };
 
